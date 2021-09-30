@@ -7,6 +7,7 @@ const barValorationController = require('../controllers/barValorationController'
 //api/bar
 router.post('/', barController.createBar);
 router.get('/:catego/:search/:city/:limit', barController.getBars);
+router.get('/:slug_bar', barController.getBarInfo);
 router.put('/:id_bar', barController.updateBarInfo);
 router.delete('/:id_bar', barController.deleteBar);
 
@@ -18,5 +19,6 @@ router.delete('/categories/:id_catego', barCategoController.deleteCatego);
 
 //valoration routes
 router.post('/valorations/', barValorationController.create_valoration);
+router.get('/valorations/:id_bar/:limit', barValorationController.getBarValorations);
 
 module.exports = router;
