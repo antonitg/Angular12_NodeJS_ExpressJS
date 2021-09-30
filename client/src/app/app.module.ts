@@ -11,6 +11,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
+import { BarComponent } from './bar/bar.component';
+import { BarModule } from './bar/bar.module';
+
 
 
 
@@ -20,9 +23,11 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     ProductComponent,
     HomeComponent,
+    // BarComponent
 
   ],
   imports: [
+    BarModule,
     HomeModule,
     ProductModule,
     BrowserModule,
