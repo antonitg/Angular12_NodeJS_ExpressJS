@@ -11,10 +11,13 @@ console.log("DINS");
 export class ListValorationsComponent implements OnInit {
   @Input("bar") bar!:Bar;
   valorations!:[Valoration];
+
   constructor(
     private valService: ValorationsService,
   ) { }
   ngOnInit(): void {
+    // this.noStars = Array(this.totalStars - this.bar.).fill(0);
+    // this.stars = Array(this.bar.valoration).fill(1);
     this.valService.getBarValorations(this.bar.id).subscribe(valorations => {
       this.valorations = valorations
       console.log(valorations);

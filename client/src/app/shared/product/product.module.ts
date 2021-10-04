@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ProductCreateComponent } from './product-create.component'
 import { ProductRoutingModule } from './product-routing.module';
 import { Star } from 'lucide-angular';
+import { ListProductsComponent } from './list-products/list-products.component';
 
 @NgModule({
   declarations: [
-    ProductCreateComponent
+    ProductCreateComponent,
+    ListProductsComponent
   ],
   exports: [
     ProductCreateComponent

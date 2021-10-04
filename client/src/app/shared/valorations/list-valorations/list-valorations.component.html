@@ -11,11 +11,20 @@
               <h2 class="title"><span> {{number.id_user}} </span>{{number.date}}</h2>
               <div class="rating-row">
                 <ul>
-                  <lucide-icon name="star" class="starfull"></lucide-icon>
-                  <lucide-icon name="star" class="starfull"></lucide-icon>
-                  <lucide-icon name="star" class="starfull"></lucide-icon>
-                  <lucide-icon name="star" class="starfull"></lucide-icon>
-                  <lucide-icon name="star" class="starfull"></lucide-icon>
+                  <lucide-icon *ngIf="number.rate >= 1; else noStr1" name="star" class="starfull"></lucide-icon>
+                  <ng-template #noStr1><lucide-icon name="star" class="star"></lucide-icon></ng-template>
+
+                  <lucide-icon *ngIf="number.rate >= 2; else noStr2" name="star" class="starfull"></lucide-icon>
+                  <ng-template #noStr2><lucide-icon name="star" class="star"></lucide-icon></ng-template>
+
+                  <lucide-icon *ngIf="number.rate >= 3; else noStr3" name="star" class="starfull"></lucide-icon>
+                  <ng-template #noStr3><lucide-icon name="star" class="star"></lucide-icon></ng-template>
+
+                  <lucide-icon *ngIf="number.rate >= 4; else noStr4" name="star" class="starfull"></lucide-icon>
+                  <ng-template #noStr4><lucide-icon name="star" class="star"></lucide-icon></ng-template>
+
+                  <lucide-icon *ngIf="number.rate >= 5; else noStr5" name="star" class="starfull"></lucide-icon>
+                  <ng-template #noStr5><lucide-icon name="star" class="star"></lucide-icon></ng-template>
                 </ul>
               </div>
             </div>
