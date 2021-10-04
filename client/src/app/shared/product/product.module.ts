@@ -11,7 +11,9 @@ import { ListProductsComponent } from './list-products/list-products.component';
     ListProductsComponent
   ],
   exports: [
-    ProductCreateComponent
+    ProductCreateComponent,
+    ListProductsComponent
+
   ],
   imports: [
     CommonModule,

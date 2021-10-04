@@ -4,6 +4,7 @@ import { BarComponent } from './bar.component';
 import { BarRoutingModule } from './bar-routing.module'
 import { ListValorationsComponent } from '../shared/valorations/list-valorations/list-valorations.component';
 import { ValorationsModule } from '../shared/valorations/valorations.module';
+import { ProductModule } from '../shared/product/product.module';
 
 
 console.log("asdasd");
@@ -17,7 +18,8 @@ console.log("asdasd");
   imports: [
     CommonModule,
     BarRoutingModule,
-    ValorationsModule
+    ValorationsModule,
+    ProductModule
   ],
   exports: [
     BarComponent

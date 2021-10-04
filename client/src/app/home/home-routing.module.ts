@@ -10,16 +10,16 @@ const routes: Routes = [
     // resolve: {
     //   profile: ProfileResolver
     // },
-    children: [
-      {
-        path: '',
-        component: HomeListComponent
-      },
-      {
-        path: '',
-        component: HomeSearchComponent
-      },
-    ]
+    // children: [
+    //   {
+    //     path: '',
+    //     component: HomeListComponent
+    //   },
+    //   {
+    //     path: '',
+    //     component: HomeSearchComponent
+    //   },
+    // ]
   }
 ];
 

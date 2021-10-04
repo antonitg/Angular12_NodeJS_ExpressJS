@@ -5,7 +5,7 @@ import { ProductComponent } from './product.component';
 console.log("prrtg");
 const routes: Routes = [
   {
-    path: '',
+    path: 'product',
     component: ProductComponent,
     // resolve: {
     //   profile: ProfileResolver

@@ -4,17 +4,14 @@ import { QuicklinkModule, QuicklinkStrategy } from 'ngx-quicklink';
 
 const routes: Routes = [
   {
-    path: 'product',
-    loadChildren: () => import('./shared/product/product.module').then(m => m.ProductModule)
+    path: '',
+    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
   {
     path: ':bar_opt',
     loadChildren: () => import('./bar/bar.module').then(m => m.BarModule)
   },
-  {
-    path: '',
-    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
-  },
+
 
 ];
 
