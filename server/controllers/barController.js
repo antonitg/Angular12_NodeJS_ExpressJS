@@ -172,7 +172,11 @@ module.exports.getBars = async(req, res) => {
 
 module.exports.getBarInfo = async(req, res) => {
     try {
-        var bar = await Bar.findOne({ slug: req.params.slug_bar });
+        var bar = await Bar.findOne({
+            where: {
+                slug: req.params.slug_bar
+            }
+        });
 
         if (!bar) {
             res.status(404).json({ msg: 'No existe el Bar' });
