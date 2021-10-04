@@ -8,7 +8,7 @@ const routes: Routes = [
     loadChildren: () => import('./shared/product/product.module').then(m => m.ProductModule)
   },
   {
-    path: ':slug_bar',
+    path: ':bar_opt',
     loadChildren: () => import('./bar/bar.module').then(m => m.BarModule)
   },
   {

@@ -6,12 +6,9 @@ const routes: Routes = [
   {
     path: ':slugbar',
     component: BarComponent,
-    // resolve: {
-    //   profile: ProfileResolver
-    // },
     children: [
       {
-        path: '',
+        path: ':slugbar/:options',
         component: BarComponent
       }
     ]
