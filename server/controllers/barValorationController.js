@@ -32,7 +32,7 @@ module.exports.getBarValorations = async(req, res) => {
         var skip = req.params.limit - 10;
 
         var valorations = await BarValoration.aggregate([
-            { "$match": { "id_bar": "83f57211cac87cdba57eb41041bf5a23aa2cd20d2cbb4a42a55d01556cd213b999b8dc51262de1d8c10c0774ae9aa5646ecb7c14eb5866f126d795c67af51fc0" } },
+            { "$match": { "id_bar": req.params.id_bar } },
             { "$unwind": "$valorations" },
             { "$sort": { "valorations.rate": -1 } },
             { "$project": { "_id": 0, "id_user": "$valorations.id_user", "rate": "$valorations.rate", "descr": "$valorations.descr", "date": "$valorations.date" } },
