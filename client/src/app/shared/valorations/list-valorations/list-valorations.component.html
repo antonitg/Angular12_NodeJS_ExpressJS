@@ -1,0 +1,28 @@
+<div class="comment-section">
+  <div class="container">
+    <div class="review">
+      <h2 class="R-title">Valorations</h2>
+      <div class="comment-section">
+
+        <div *ngFor="let number of valorations" class="media media-review">
+          <div class="media-user"><img src="https://i.imgur.com/nUNhspp.jpg" alt=""></div>
+          <div class="media-body">
+            <div class="M-flex">
+              <h2 class="title"><span> {{number.id_user}} </span>{{number.date}}</h2>
+              <div class="rating-row">
+                <ul>
+                  <lucide-icon name="star" class="starfull"></lucide-icon>
+                  <lucide-icon name="star" class="starfull"></lucide-icon>
+                  <lucide-icon name="star" class="starfull"></lucide-icon>
+                  <lucide-icon name="star" class="starfull"></lucide-icon>
+                  <lucide-icon name="star" class="starfull"></lucide-icon>
+                </ul>
+              </div>
+            </div>
+            <div class="description">{{number.descr}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

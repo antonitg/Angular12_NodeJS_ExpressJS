@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductCreateComponent } from './product-create.component'
 import { ProductRoutingModule } from './product-routing.module';
-
+import { Star } from 'lucide-angular';
 
 @NgModule({
   declarations: [
@@ -13,7 +13,7 @@ import { ProductRoutingModule } from './product-routing.module';
   ],
   imports: [
     CommonModule,
-    ProductRoutingModule
+    ProductRoutingModule,
   ]
 })
 export class ProductModule { }

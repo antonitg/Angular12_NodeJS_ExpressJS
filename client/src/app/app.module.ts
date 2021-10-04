@@ -13,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { BarComponent } from './bar/bar.component';
 import { BarModule } from './bar/bar.module';
+import { ListValorationsComponent } from './shared/valorations/list-valorations/list-valorations.component';
+import { ValorationsModule } from './shared/valorations/valorations.module';
 
 
 
@@ -23,10 +25,10 @@ import { BarModule } from './bar/bar.module';
     AppComponent,
     ProductComponent,
     HomeComponent,
-    // BarComponent
 
   ],
   imports: [
+    ValorationsModule,
     BarModule,
     HomeModule,
     ProductModule,

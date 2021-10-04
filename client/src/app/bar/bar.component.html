@@ -38,9 +38,9 @@
     </ul>
 </div>
 <container-element [ngSwitch]="page">
-  <!-- <some-element *ngSwitchCase="info">...</some-element>
-  <some-element *ngSwitchCase="res">...</some-element>
-  <some-element *ngSwitchDefault>...</some-element> -->
+  <!-- <some-element *ngSwitchCase="info">...</some-element> -->
+  <app-list-valorations *ngSwitchCase="'res'" [bar]="bar"></app-list-valorations>
+  <!-- <some-element *ngSwitchDefault>...</some-element> -->
 </container-element>
 
 
