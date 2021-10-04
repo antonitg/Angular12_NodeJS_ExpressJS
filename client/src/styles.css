@@ -155,3 +155,42 @@ body{
   color: #aaa;
   font-style: italic;
 }
+
+
+
+/* BAR PAGE */
+#barTitle {
+  font-size: 6.5em;
+  color: white;
+  font-weight: bolder;
+  margin-bottom: 0.7em!important;
+  margin-top: 0.7em!important;
+}
+.nav-item {
+  margin-right: 25px;
+  margin-left: 25px;
+  font-size: 1.55em;
+  color: #EFA127!important;
+}
+.nav-link {
+  color: #EFA127;
+  font-weight: normal;
+  border-bottom: #EFA127 2px solid;
+}
+#barNav {
+  margin-top: 25px;
+}
+.nav-link:hover {
+  color: #EFA127;
+  font-weight: bolder;
+  border-bottom: #EFA127 5px solid;
+
+}
+.nav-link-selected {
+  color: #EFA127;
+  font-weight: bolder;
+  border-bottom: #EFA127 5px solid;
+
+  /* border:dashed; */
+}
+

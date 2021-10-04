@@ -9,7 +9,7 @@ import { Categorie } from '../core/models/categories.model';
 })
 export class HomeSearchComponent implements OnInit, AfterViewInit {
     arrBars!: any[];
-    totalBars = 9;
+    totalBars = 10;
     @ViewChild('inputCiutat') inCiu!: ElementRef;
     @ViewChild('inputNom') inNom!: ElementRef;
     @ViewChild('inputCat') inCat!: ElementRef;
@@ -48,6 +48,7 @@ export class HomeSearchComponent implements OnInit, AfterViewInit {
       // FALTA FICAR EL ONCHANGE DEL CAT I FER QUE FUNCIONE
       this.inNom.nativeElement.value=""
       this.inCiu.nativeElement.value=""
+      this.getBars(false);
 
     }
     getBars(keepalive: boolean) {
