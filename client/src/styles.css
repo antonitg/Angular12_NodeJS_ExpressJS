@@ -225,6 +225,7 @@ body{
   .card-sl {
       border-radius: 8px;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      margin-bottom: 25px;
   }
 
   .card-image img {
@@ -272,15 +273,16 @@ body{
       justify-content: center;
       padding: 10px 0;
       width: 100%;
-      background-color: #1F487E;
+      background-color: #F22F59;
       color: #fff;
       border-radius: 0 0 8px 8px;
   }
 
   .card-button:hover {
       text-decoration: none;
-      background-color: #1D3461;
-      color: #fff;
+      background-color: #EFA127;
+      color: white;
+      font-weight: bolder;
 
   }
 
@@ -309,3 +311,34 @@ body{
           box-shadow: 0 0 0 0 rgba(90, 153, 212, 0);
       }
   }
+.bt-tggle-cat {
+  margin-top: 25px;
+  text-align: center;
+  padding-left: 12px!important;
+  padding-right: 12px!important;
+  color: #EFA127;
+  border: #EFA127 solid 1px!important;
+  font-weight: bold;
+
+}
+.bt-tggle-cat:hover {
+  margin-top: 25px;
+  text-align: center;
+  color: white;
+  font-weight: bolder;
+  background-color: #EFA127;
+  border: #b67712 solid 1px!important;
+}
+.divbt-tggle-cat {
+  display: -webkit-inline-flex;
+  justify-content: center;
+  width: 100%;
+}
+.list-group-item {
+  border: 0px !important;
+  border-left: 2px #E26D5C solid !important;
+}
+.list-group-item-active {
+  border: 0px !important;
+  border-left: 5px #E26D5C solid !important;
+}
