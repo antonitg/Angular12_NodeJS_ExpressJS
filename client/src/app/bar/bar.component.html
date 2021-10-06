@@ -8,57 +8,64 @@
   </div>
 </div>
 <div id="barNav">
-    <ul class="nav justify-content-center">
-      <li *ngIf="page == 'carta'; else noSelCart" class="nav-item">
-        <a class="nav-link nav-link-selected" aria-current="page" href="">Carta</a>
+  <ul class="nav justify-content-center">
+    <li *ngIf="page == 'carta'; else noSelCart" class="nav-item">
+      <a class="nav-link nav-link-selected" aria-current="page" href="">Carta</a>
+    </li>
+    <ng-template #noSelCart>
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/carta/{{slug_bar}}">Carta</a>
       </li>
-      <ng-template #noSelCart>
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/carta/{{slug_bar}}">Carta</a>
-        </li>
-      </ng-template>
-
-      <li *ngIf="page == 'res'; else noSelRes" class="nav-item">
-        <a class="nav-link nav-link-selected" href="">Reseñas</a>
+    </ng-template>
+    <li *ngIf="page == 'res'; else noSelRes" class="nav-item">
+      <a class="nav-link nav-link-selected" href="">Reseñas</a>
+    </li>
+    <ng-template #noSelRes>
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/res/{{slug_bar}}">Reseñas</a>
       </li>
-      <ng-template #noSelRes>
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/res/{{slug_bar}}">Reseñas</a>
-        </li>
-      </ng-template>
-
-      <li *ngIf="page == 'info'; else noSelInf" class="nav-item">
-        <a class="nav-link nav-link-selected" href="">Información</a>
+    </ng-template>
+    <li *ngIf="page == 'info'; else noSelInf" class="nav-item">
+      <a class="nav-link nav-link-selected" href="">Información</a>
+    </li>
+    <ng-template #noSelInf>
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/info/{{slug_bar}}">Información</a>
       </li>
-      <ng-template #noSelInf>
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/info/{{slug_bar}}">Información</a>
-        </li>
-      </ng-template>
-    </ul>
+    </ng-template>
+  </ul>
 </div>
 <container-element [ngSwitch]="page">
   <!-- <app-list-products></app-list-products> -->
   <div *ngSwitchCase="'carta'">
-   <div >
-    <div class="accordion" id="accordionExample">
-      <div *ngFor="let catego of categos" class="accordion-item">
-        <h2 class="accordion-header" id="headingOne">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-toggle]="" [attr.data-bs-target]="'#'+catego.nom" aria-expanded="true" aria-controls="collapseOne">
-            {{catego.nom}}
-          </button>
-        </h2>
-        <div id="{{catego.nom}}" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-          <div class="accordion-body">
-            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+    <div class="container-fluid">
+      <div class="row flex-nowrap">
+        <div class="col-auto px-0">
+          <div id="sidebar" class="collapse collapse-horizontal show border-end">
+            <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
+              <a *ngFor="let catego of categos" (click)="changeCatego(catego)"  class="list-group-item border-end-0 d-inline-block text-truncate"
+                data-bs-parent="#sidebar"> <span>{{catego.nom}}</span> </a>
+
+            </div>
           </div>
         </div>
+        <main class="col ps-md-2 pt-2">
+          <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
+            class="border rounded-3 p-1 text-decoration-none"><i class="bi bi-list bi-lg py-2 p-1"></i> Menu</a>
+          <div class="container" style="margin-top:50px;">
+            <div class="row">
+              <div class="col-md-3" *ngFor="let prod of prodList">
+              <app-list-products [prod]="prod"></app-list-products>
+            </div>
+            </div>
+          </div>
+
+        </main>
       </div>
     </div>
-   </div>
   </div>
+
+
   <app-list-valorations *ngSwitchCase="'res'" [bar]="bar"></app-list-valorations>
   <!-- <some-element *ngSwitchDefault>...</some-element> -->
 </container-element>
-
-

@@ -20,6 +20,10 @@ export class BarService {
           //   console.log(data);
           //   data.bars}));
   }
+  getProdByCatego(id_catego: string): Observable<any> {
+    return this.apiService.get('products/categories/prods/'+id_catego)
+  }
+
   getBarInfo(slug_bar: string): Observable<Bar> {
     return this.apiService.get('bar/'+slug_bar)
   }

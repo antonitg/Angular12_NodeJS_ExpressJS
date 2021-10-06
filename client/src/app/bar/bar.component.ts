@@ -17,21 +17,30 @@ export class BarComponent implements OnInit {
   page!:string;
   bar!:Bar;
   categos!:any;
-
+  actCatego!:any;
+  prodList!:any;
   ngOnInit(): void {
     this.route.params.subscribe( params => {
       this.slug_bar = params['slugbar'];
       this.page = params['bar_opt']
-
       this.printInfo()
-
     })
-
+}
+changeCatego(id_catego:any) {
+  this.actCatego = id_catego;
+  this.getProds()
 }
 getCategos() {
   this.BarService.getAllFrom(this.bar.id).subscribe(cats => {
     this.categos = cats;
-    console.log(cats)
+    this.actCatego = cats[0];
+    this.getProds()
+  })
+}
+getProds() {
+  this.BarService.getProdByCatego(this.actCatego._id).subscribe(prods => {
+    this.prodList = prods
+    console.log(prods)
   })
 }
   printInfo() {
