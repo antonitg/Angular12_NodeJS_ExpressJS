@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
+const uniqueValidator = require('mongoose-beautiful-unique-validation');
 const slug = require('slug');
 
 const ProdSchema = mongoose.Schema({
@@ -10,32 +10,64 @@ const ProdSchema = mongoose.Schema({
     },
     nom: {
         type: String,
-        required: true,
+        required: true
     },
     id_bar: {
         type: String,
-        required: true,
+        required: true
     },
     descr: {
         type: String,
-        required: true,
+        required: true
     },
     id_cat: {
         type: String,
-        required: true,
-    },
-    preu: {
-        type: Number,
-        required: true,
-    },
-    stock: {
-        type: Boolean,
-        required: true,
+        required: true
     },
     foto: {
         type: String,
-        required: false,
-    }
+        required: false
+    },
+    types: [{
+        nom: {
+            type: String,
+            required: true
+        },
+        descr: {
+            type: String,
+            required: true
+        },
+        preu: {
+            type: Number,
+            required: true
+        },
+        stock: {
+            type: Boolean,
+            required: true
+        }
+    }],
+    extras: [{
+        nom: {
+            type: String,
+            required: true
+        },
+        descr: {
+            type: String,
+            required: true
+        },
+        preu: {
+            type: Number,
+            required: true
+        },
+        foto: {
+            type: String,
+            required: false
+        },
+        solo: {
+            type: Boolean,
+            required: true
+        }
+    }]
 }, {
     timestamps: true
 });

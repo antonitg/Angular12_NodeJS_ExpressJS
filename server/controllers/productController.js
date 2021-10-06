@@ -1,8 +1,6 @@
 const Product = require("../models/productModel.js");
 
 
-
-
 exports.crearProduct = async(req, res) => {
     try {
         let product = new Product;
@@ -10,9 +8,27 @@ exports.crearProduct = async(req, res) => {
         product.id_bar = req.body.id_bar;
         product.descr = req.body.descr;
         product.id_cat = req.body.id_cat;
-        product.preu = req.body.preu;
-        product.stock = req.body.stock;
         product.foto = req.body.foto;
+
+        for (let i = 0; i < req.body.types.length; i++) {
+            product.types.push({
+                nom: req.body.types[i].nom,
+                descr: req.body.types[i].descr,
+                preu: req.body.types[i].preu,
+                stock: req.body.types[i].stock
+            });
+        }
+
+        for (let i = 0; i < req.body.extras.length; i++) {
+            product.extras.push({
+                nom: req.body.extras[i].nom,
+                descr: req.body.extras[i].descr,
+                preu: req.body.extras[i].preu,
+                foto: req.body.extras[i].foto,
+                solo: req.body.extras[i].solo
+            });
+        }
+
         await product.save();
         res.send(product);
     } catch (error) {
