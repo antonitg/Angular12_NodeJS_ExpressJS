@@ -1,0 +1,9 @@
+<nav *ngIf="showGeneralNav" class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand">APPBAR</a>
+    <form class="d-flex">
+      <button *appShowAuthed="false" class="btn btn-outline-success">Login</button>
+      <button *appShowAuthed="true" class="btn btn-danger">Log Out</button>
+    </form>
+  </div>
+</nav>

@@ -15,6 +15,8 @@ import { BarComponent } from './bar/bar.component';
 import { BarModule } from './bar/bar.module';
 import { ListValorationsComponent } from './shared/valorations/list-valorations/list-valorations.component';
 import { ValorationsModule } from './shared/valorations/valorations.module';
+import { LayoutComponent } from './shared/layout/layout.component';
+import { ShowAuthedDirective } from './shared/layout/show-authed.directive';
 
 
 
@@ -25,6 +27,8 @@ import { ValorationsModule } from './shared/valorations/valorations.module';
     AppComponent,
     ProductComponent,
     HomeComponent,
+    LayoutComponent,
+    ShowAuthedDirective,
 
   ],
   imports: [
