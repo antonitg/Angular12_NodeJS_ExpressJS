@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Bar } from 'src/app/core/models/bar.models';
 import { Valoration } from 'src/app/core/models/valorations.model';
 import { ValorationsService } from 'src/app/core/services';
-console.log("DINS");
 
 @Component({
   selector: 'app-list-valorations',
@@ -20,7 +19,6 @@ export class ListValorationsComponent implements OnInit {
     // this.stars = Array(this.bar.valoration).fill(1);
     this.valService.getBarValorations(this.bar.id).subscribe(valorations => {
       this.valorations = valorations
-      console.log(valorations);
     })
   }
 

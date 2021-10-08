@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { QuicklinkModule, QuicklinkStrategy } from 'ngx-quicklink';
+import { AuthComponent } from './auth/auth.component';
+import { BarComponent } from './bar/bar.component';
 
 const routes: Routes = [
   {
@@ -8,9 +10,14 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
   {
+    path: 'app/auth',
+    component: AuthComponent
+  },
+  {
     path: ':bar_opt',
     loadChildren: () => import('./bar/bar.module').then(m => m.BarModule)
   },
+
 
 
 ];
