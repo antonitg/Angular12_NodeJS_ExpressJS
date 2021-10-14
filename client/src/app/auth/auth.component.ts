@@ -1,5 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormControlName } from '@angular/forms';
 import { left, right } from '@popperjs/core';
 
 @Component({
@@ -7,39 +7,41 @@ import { left, right } from '@popperjs/core';
   templateUrl: './auth.component.html',
 })
 
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, OnChanges {
   @ViewChild('singIn') btSignIn!: ElementRef;
   @ViewChild('singUp') btSignUp!: ElementRef;
   @ViewChild('logcontainer') container!: ElementRef;
-  regForm: FormGroup;
-  logForm: FormGroup;
-  authForm: FormGroup;
 
+  validPassword = false
 
   constructor(
+  ) {  }
 
-    private fb: FormBuilder
-  ) {
-    this.authForm = this.fb.group({
-      'email': ['', Validators.required],
-      'password': ['', Validators.required]
-    });
-    this.regForm = this.fb.group({
-      'regEmail' : ['', Validators.required],
-      'regPass' : ['', Validators.required],
-      'regUser' : ['', Validators.required]
-    })
-    this.logForm = this.fb.group({
-      'logEmail': ['', Validators.required],
-      'logPass': ['', Validators.required],
-    })
 
-  }
+  regForm = new FormGroup({
+    regEmail: new FormControl(null, Validators.required),
+    regUser: new FormControl(null,Validators.required),
+    regPass: new FormControl(null,Validators.required),
+    regPass2: new FormControl("null",Validators.required),
+
+
+  })
 
   ngOnInit(): void {
     console.log(this.container);
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
 
+    this.checkPass()
+    console.log(this.validPassword);
+
+
+  }
+  checkPass():void {
+    this.validPassword = this.regForm.value["regPass"] == this.regForm.value["regPass2"]? true : false
+
+  }
   rightPanel() {
     this.container.nativeElement.classList.add("right-panel-active");
   }

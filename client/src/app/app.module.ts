@@ -17,6 +17,8 @@ import { ListValorationsComponent } from './shared/valorations/list-valorations/
 import { ValorationsModule } from './shared/valorations/valorations.module';
 import { LayoutComponent } from './shared/layout/layout.component';
 import { ShowAuthedDirective } from './shared/layout/show-authed.directive';
+import { AuthComponent } from './auth/auth.component';
+import { AuthModule } from './auth/auth.module';
 
 
 
@@ -41,7 +43,8 @@ import { ShowAuthedDirective } from './shared/layout/show-authed.directive';
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

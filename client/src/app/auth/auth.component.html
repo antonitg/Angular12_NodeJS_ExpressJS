@@ -1,50 +1,51 @@
 <div class="generallogcontainer">
-<div class="logcontainer" #logcontainer id="logcontainer">
-	<div class="logform-container logsign-up-container">
-		<form>
-			<h1>Create Account</h1>
-			<div class="logsocial-container">
-				<a href="#" class="logsocial"><i class="fab fa-facebook-f"></i></a>
-				<a href="#" class="logsocial"><i class="fab fa-google-plus-g"></i></a>
-				<a href="#" class="logsocial"><i class="fab fa-linkedin-in"></i></a>
-			</div>
-			<span>or use your email for registration</span>
-      <fieldset class="form-group">
+  <div class="logcontainer" #logcontainer id="logcontainer">
+    <div class="logform-container logsign-up-container">
+      <form [formGroup]="this.regForm">
+        <h1>Register</h1>
+        <div class="logsocial-container">
+          <a href="#" class="logsocial"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="logsocial"><i class="fab fa-google-plus-g"></i></a>
+          <a href="#" class="logsocial"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <span>or use your email for registration</span>
         <input formControlName="regUser" type="text" class="form-control form-control-lg" placeholder="Name" />
-			</fieldset>
-      <input formControlName="regEmail" placeholder="Email" class="form-control form-control-lg" type="email" placeholder="Email" />
-			<input formControlName="regPass" type="password" class="form-control form-control-lg" placeholder="Password" />
-			<button>Sign Up</button>
-		</form>
-	</div>
-	<div class="logform-container logsign-in-container">
-		<form action="#">
-			<h1>Sign in</h1>
-			<div class="logsocial-container">
-				<a href="#" class="logsocial"><i class="fab fa-facebook-f"></i></a>
-				<a href="#" class="logsocial"><i class="fab fa-google-plus-g"></i></a>
-				<a href="#" class="logsocial"><i class="fab fa-linkedin-in"></i></a>
-			</div>
-			<span>or use your account</span>
-			<input type="email" placeholder="Email" />
-			<input type="password" placeholder="Password" />
-			<a href="#">Forgot your password?</a>
-			<button>Sign In</button>
-		</form>
-	</div>
-	<div class="logoverlay-container">
-		<div class="logoverlay">
-			<div class="logoverlay-panel logoverlay-left">
-				<h1>Welcome Back!</h1>
-				<p>To keep connected with us please login with your personal info</p>
-				<button class="ghost" id="logsignIn" (click)="leftPanel()">Sign In</button>
-			</div>
-			<div class="logoverlay-panel logoverlay-right">
-				<h1>Hello, Friend!</h1>
-				<p>Enter your personal details and start journey with us</p>
-				<button class="ghost" id="logsignUp" (click)="rightPanel()">Sign Up</button>
-			</div>
-		</div>
-	</div>
-</div>
+        <input formControlName="regEmail" placeholder="Email" class="form-control form-control-lg" type="email"
+          placeholder="Email" />
+        <input formControlName="regPass" type="password" class="form-control form-control-lg" placeholder="Password" />
+        <input formControlName="regPass2" type="password" class="form-control form-control-lg" placeholder="Repeat Password" />
+
+        <button [disabled]="!this.validPassword">Sign Up</button>
+      </form>
+    </div>
+    <div class="logform-container logsign-in-container">
+      <form action="#">
+        <h1>Sign in</h1>
+        <div class="logsocial-container">
+          <a href="#" class="logsocial"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="logsocial"><i class="fab fa-google-plus-g"></i></a>
+          <a href="#" class="logsocial"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <span>or use your account</span>
+        <input type="email" placeholder="Email" />
+        <input type="password" placeholder="Password" />
+        <a href="#">Forgot your password?</a>
+        <button>Sign In</button>
+      </form>
+    </div>
+    <div class="logoverlay-container">
+      <div class="logoverlay">
+        <div class="logoverlay-panel logoverlay-left">
+          <h1>Welcome Back!</h1>
+          <p>To keep connected with us please login with your personal info</p>
+          <button class="ghost" id="logsignIn" (click)="leftPanel()">Sign In</button>
+        </div>
+        <div class="logoverlay-panel logoverlay-right">
+          <h1>Hello, Friend!</h1>
+          <p>Enter your personal details and start journey with us</p>
+          <button class="ghost" id="logsignUp" (click)="rightPanel()">Sign Up</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
