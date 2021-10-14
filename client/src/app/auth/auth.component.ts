@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormControlName } from '@angular/forms';
 import { left, right } from '@popperjs/core';
+import { UserService } from '../core/services/user.service';
 
 @Component({
   selector: 'app-auth',
@@ -13,16 +14,18 @@ export class AuthComponent implements OnInit, OnChanges {
   @ViewChild('logcontainer') container!: ElementRef;
 
   validPassword = false
+  user!: {};
 
   constructor(
+    private UserService : UserService
   ) {  }
 
 
   regForm = new FormGroup({
-    regEmail: new FormControl(null, Validators.required),
-    regUser: new FormControl(null,Validators.required),
-    regPass: new FormControl(null,Validators.required),
-    regPass2: new FormControl("null",Validators.required),
+    nom: new FormControl(null, Validators.required),
+    passwd: new FormControl(null,Validators.required),
+    repasswd: new FormControl(null,Validators.required),
+    email: new FormControl(null,Validators.required),
 
 
   })
@@ -47,5 +50,13 @@ export class AuthComponent implements OnInit, OnChanges {
   }
   leftPanel() {
     this.container.nativeElement.classList.remove("right-panel-active");
+  }
+  register() {
+    console.log(this.regForm.value);
+
+    this.UserService.register(this.regForm.value).subscribe( params => {
+      console.log(params);
+
+    })
   }
 }

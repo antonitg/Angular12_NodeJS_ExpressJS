@@ -22,7 +22,7 @@ export class ApiService {
       .pipe(catchError(this.formatErrors));
   }
 
-  put(path: string, body: Object = {}): Observable<any> {
+  put(path: string, body: Object): Observable<any> {
     return this.http.put(
       `${environment.api_url}${path}`,
       JSON.stringify(body)
@@ -30,10 +30,8 @@ export class ApiService {
   }
 
   post(path: string, body: Object = {}): Observable<any> {
-    return this.http.post(
-      `${environment.api_url}${path}`,
-      JSON.stringify(body)
-    ).pipe(catchError(this.formatErrors));
+    return this.http.post(`${environment.api_url}${path}`,body
+        ).pipe(catchError(this.formatErrors));
   }
 
   delete(path: string): Observable<any> {
