@@ -1,12 +1,12 @@
 const Sequelize = require('sequelize');
 const User = require('../models').user;
 const { validateUser } = require('../utils/validate');
-const { setPassword } = require('../utils/password');
+const { setPassword, passwordCheck } = require('../utils/password');
 const { generateId } = require('../utils/generateIds');
 const gravatar = require('gravatar');
 
 
-module.exports.create = async(req, res) => {
+module.exports.register = async(req, res) => {
     try {
         const { nom, passwd, repasswd, email } = req.body;
 
@@ -27,6 +27,29 @@ module.exports.create = async(req, res) => {
             // console.log("error validation");
             res.json(validation);
         }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('ERROR 500');
+    }
+}
+
+module.exports.login = async(req, res) => {
+    try {
+        const { email, passwd } = req.body;
+
+        var user = await User.findOne({
+            where: {
+                email: email
+            }
+        });
+
+        if (user) {
+            if (passwordCheck(passwd, user.passwd)) {
+                res.json(user);
+            }
+        }
+
+        res.status(404).json({ msg: "Email o contraseña incorrectos" });
     } catch (error) {
         console.log(error);
         res.status(500).send('ERROR 500');

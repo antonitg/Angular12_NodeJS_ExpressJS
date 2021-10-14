@@ -3,7 +3,8 @@ const router = express.Router();
 const userController = require('../controllers/userController.js');
 
 //api/users
-router.post('/', userController.create);
+router.post('/', userController.register);
+router.post('/login/', userController.login);
 router.get('/:nom', userController.find);
 // router.get('/:id', userController.obtenerProduct);
 // router.delete('/:id', userController.eliminarProduct);
