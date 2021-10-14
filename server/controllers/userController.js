@@ -13,7 +13,7 @@ module.exports.register = async(req, res) => {
         let validation = validateUser(nom, passwd, repasswd, email);
 
         if (validation == true) {
-            let c_user = await User.create({
+            await User.create({
                 id: generateId(),
                 nom: nom,
                 passwd: setPassword(passwd),
@@ -22,7 +22,7 @@ module.exports.register = async(req, res) => {
                 estado: 0
             });
 
-            res.json(c_user);
+            res.status(200).json({ msg: "Tot ok" });
         } else {
             // console.log("error validation");
             res.json(validation);

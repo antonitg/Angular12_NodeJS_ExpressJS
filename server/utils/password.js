@@ -13,14 +13,14 @@ module.exports.setPassword = function(passwd) {
 };
 
 module.exports.passwordCheck = function(passwd, hash1) {
-    const { salt, hash } = hash1.split(':');
+    const hash = hash1.split(':');
 
-    console.log(hash1);
+    console.log(hash[0]);
 
     passwd = hmacSHA512(passwd, process.env.SECRET_PASSWD).toString();
-    var newhash = crypto.pbkdf2Sync(passwd, salt, 10000, 512, 'sha512').toString('hex');
+    var newhash = crypto.pbkdf2Sync(passwd, hash[0], 10000, 512, 'sha512').toString('hex');
 
-    if (hash === newhash) {
+    if (hash[1] === newhash) {
         return true;
     }
     return false;
