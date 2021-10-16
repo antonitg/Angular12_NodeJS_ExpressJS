@@ -1,9 +1,9 @@
-const Sequelize = require('sequelize');
 const User = require('../models').user;
 const { validateUser } = require('../utils/validate');
 const { setPassword, passwordCheck } = require('../utils/password');
 const { generateId } = require('../utils/generateIds');
 const gravatar = require('gravatar');
+const { sign } = require('../utils/jwt');
 
 
 module.exports.register = async(req, res) => {
@@ -45,11 +45,13 @@ module.exports.login = async(req, res) => {
 
         if (user) {
             if (passwordCheck(passwd, user.passwd)) {
-                res.json(user);
+                res.json({ token: sign(user.id) });
+            } else {
+                res.status(404).json({ msg: "Email o contraseña incorrectos" });
             }
+        } else {
+            res.status(404).json({ msg: "Email o contraseña incorrectos" });
         }
-
-        res.status(404).json({ msg: "Email o contraseña incorrectos" });
     } catch (error) {
         console.log(error);
         res.status(500).send('ERROR 500');

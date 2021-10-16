@@ -7,15 +7,11 @@ module.exports.setPassword = function(passwd) {
     passwd = hmacSHA512(passwd, process.env.SECRET_PASSWD).toString();
     let hash = salt + ':' + crypto.pbkdf2Sync(passwd, salt, 10000, 512, 'sha512').toString('hex');
 
-
-    console.log(hash);
     return hash;
 };
 
 module.exports.passwordCheck = function(passwd, hash1) {
     const hash = hash1.split(':');
-
-    console.log(hash[0]);
 
     passwd = hmacSHA512(passwd, process.env.SECRET_PASSWD).toString();
     var newhash = crypto.pbkdf2Sync(passwd, hash[0], 10000, 512, 'sha512').toString('hex');
