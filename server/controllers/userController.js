@@ -45,7 +45,13 @@ module.exports.login = async(req, res) => {
 
         if (user) {
             if (passwordCheck(passwd, user.passwd)) {
-                res.json({ token: sign(user.id) });
+                res.json({
+                    token: sign(user.id),
+                    user: {
+                        nom: user.nom,
+                        foto: user.foto
+                    }
+                });
             } else {
                 res.status(404).json({ msg: "Email o contraseña incorrectos" });
             }
