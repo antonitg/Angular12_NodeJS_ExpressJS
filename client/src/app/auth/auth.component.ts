@@ -2,6 +2,8 @@ import { Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } fr
 import { FormGroup, FormControl, Validators, FormControlName, ValidationErrors } from '@angular/forms';
 import { left, right } from '@popperjs/core';
 import { UserService } from '../core/services/user.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-auth',
@@ -18,6 +20,7 @@ export class AuthComponent implements OnInit {
   user!: {};
 
   constructor(
+    private toastr: ToastrService,
     private UserService : UserService
   ) {  }
 
@@ -58,7 +61,19 @@ export class AuthComponent implements OnInit {
     console.log(this.regForm.value);
 
     this.UserService.register(this.regForm.value).subscribe( params => {
-      console.log(params);
+console.log(params);
+
+      if (params.msg){
+         this.toastr.success(params.msg)
+       } else {
+        Object.values(params).forEach(element => {
+          if (element != "") {
+            this.toastr.error(element as string);
+          }
+
+        });
+       }
+
 
     })
   }
