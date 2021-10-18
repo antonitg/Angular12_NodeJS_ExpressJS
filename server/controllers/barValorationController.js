@@ -11,7 +11,7 @@ module.exports.create_valoration = async(req, res) => {
         }
 
         var valoration = {
-            id_user: req.body.id_user,
+            id_user: req.user.id,
             rate: new_rate,
             descr: req.body.descr,
             date: new Date()
@@ -19,7 +19,7 @@ module.exports.create_valoration = async(req, res) => {
 
         await BarValoration.updateOne({ id_bar: req.body.id_bar }, { $push: { valorations: valoration } });
 
-        res.json("Valoracion creada correctamente");
+        res.json({ msg: "Valoracion creada correctamente" });
     } catch (error) {
         console.log(error);
         res.status(500).send('ERROR 500');

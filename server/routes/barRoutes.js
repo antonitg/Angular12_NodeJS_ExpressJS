@@ -3,6 +3,7 @@ const router = express.Router();
 const barController = require('../controllers/barController.js');
 const barCategoController = require('../controllers/barCategoController.js');
 const barValorationController = require('../controllers/barValorationController');
+const { authByToken } = require('../middleware/auth');
 
 //api/bar
 router.post('/', barController.createBar);
@@ -18,7 +19,7 @@ router.put('/categories/:id_catego', barCategoController.updateCatego);
 router.delete('/categories/:id_catego', barCategoController.deleteCatego);
 
 //valoration routes
-router.post('/valorations/', barValorationController.create_valoration);
+router.post('/valorations/', authByToken, barValorationController.create_valoration);
 router.get('/valorations/:id_bar/:limit', barValorationController.getBarValorations);
 
 module.exports = router;
