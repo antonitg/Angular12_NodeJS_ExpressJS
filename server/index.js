@@ -17,6 +17,10 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 
+app.get('/', function(req, res) {
+    res.json({ msg: "API REST APPBAR" });
+});
+
 app.use('/api/products', productRouting);
 app.use('/api/user', userRouting);
 app.use('/api/bar', barRouting);

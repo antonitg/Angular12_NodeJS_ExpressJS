@@ -20,14 +20,15 @@ module.exports.authByToken = async(req, res, next) => {
     //Check if token is valid
     const token = authHeader[1];
     try {
-        const user = await decode(token);
+        const user = decode(token);
+
         if (!user) {
             throw new Error('No user found in token');
         }
 
-        let time = new Date;
+        let time = new Date();
 
-        if (user.exp > time.getTime()) {
+        if (user.exp < parseInt(time.getTime() / 1000)) {
             throw new Error('Expired token');
         }
 
