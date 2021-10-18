@@ -10,12 +10,15 @@
         </div>
         <span>or use your email for registration</span>
         <input formControlName="nom" type="text" class="form-control form-control-lg" placeholder="Name" />
-        <input formControlName="email" placeholder="Email" class="form-control form-control-lg" type="email"
-          placeholder="Email" />
-        <input formControlName="passwd" type="password" class="form-control form-control-lg" (change)="checkPass()" placeholder="Password" />
-        <input formControlName="repasswd" type="password" class="form-control form-control-lg" (change)="checkPass()" placeholder="Repeat Password" />
+        <input formControlName="email" placeholder="Email" class="form-control form-control-lg" (keyup)="checkEmail()" [pattern]="emailPattern" type="email"
+          placeholder="Email" /><span *ngIf="this.validEmail == 1">Email no correcto</span>
+        <input formControlName="passwd" type="password" class="form-control form-control-lg" [pattern]="passPattern" (keyup)="checkPass()" placeholder="Password" />
+        <input formControlName="repasswd" type="password" class="form-control form-control-lg" [pattern]="passPattern" (keyup)="checkPass()" placeholder="Repeat Password" />
+        <span *ngIf="this.validPassword == 1">Las contraseñas no coinciden</span>
+        <span *ngIf="this.strongPassword == 1">La contraseña no es fuerte</span>
+        <!-- <button [disabled]="this.validPassword != 2 && this.validEmail != 2 && this.strongPassword != 2" (click)="register()">Sign Up</button> -->
+        <button (click)="register()">Sign Up</button>
 
-        <button [disabled]="!this.validPassword" (click)="register()">Sign Up</button>
       </form>
     </div>
     <div class="logform-container logsign-in-container">
