@@ -45,8 +45,7 @@ module.exports.login = async(req, res) => {
 
         if (user) {
             if (passwordCheck(passwd, user.passwd)) {
-                res.json({
-                    token: sign(user.id),
+                res.header('Authorization', "Token " + sign(user.id)).json({
                     user: {
                         nom: user.nom,
                         foto: user.foto
