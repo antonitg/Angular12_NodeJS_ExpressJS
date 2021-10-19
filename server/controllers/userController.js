@@ -70,7 +70,6 @@ module.exports.find = async(req, res) => {
         const user = req.user;
 
         res.status(200).json({
-            id: user.id,
             nom: user.nom,
             foto: user.foto
         });
