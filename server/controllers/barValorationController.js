@@ -1,5 +1,6 @@
 const { json } = require("body-parser");
 const BarValoration = require("../models/barValorationModel");
+const User = require('../models').user;
 
 module.exports.create_valoration = async(req, res) => {
     try {
@@ -42,6 +43,21 @@ module.exports.getBarValorations = async(req, res) => {
 
         if (!valorations) {
             res.status(404).json({ msg: 'No existe el Bar' });
+        }
+
+        for (let i = 0; i < valorations.length; i++) {
+
+            this_user = await User.findOne({
+                where: {
+                    id: valorations[i].id_user
+                }
+            });
+
+            if (!this_user) {
+                this_user = { nom: "Usuario no encontrado" };
+            }
+
+            valorations[i].nom = this_user.nom;
         }
 
         res.json(valorations);

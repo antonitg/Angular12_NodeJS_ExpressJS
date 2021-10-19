@@ -1,11 +1,11 @@
 const { decode } = require('../utils/jwt');
-const User = require('../models/user');
+const User = require('../models').user;
 
 module.exports.authByToken = async(req, res, next) => {
 
     //Check for Authorization header
     const authHeader = req.header('Authorization') ? req.header('Authorization').split(' ') : null;
-    console.log(authHeader);
+
     if (!authHeader) {
         return res.status(422).json({
             errors: { body: ['Authorization failed', 'No Authorization header'] }

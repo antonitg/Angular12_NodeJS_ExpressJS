@@ -24,7 +24,6 @@ module.exports.register = async(req, res) => {
 
             res.status(200).json({ msg: "Tot ok" });
         } else {
-            // console.log("error validation");
             res.json(validation);
         }
     } catch (error) {
@@ -36,6 +35,8 @@ module.exports.register = async(req, res) => {
 module.exports.login = async(req, res) => {
     try {
         const { email, passwd } = req.body;
+
+        console.log(User);
 
         var user = await User.findOne({
             where: {
