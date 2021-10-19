@@ -53,10 +53,7 @@ export class UserService {
   }
 
   register(user: any): Observable<any> {
-    console.log(user);
-
       return this.apiService.post('user/', user)
-
   }
 
   getCurrentUser(): User {
