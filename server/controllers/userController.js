@@ -69,9 +69,11 @@ module.exports.find = async(req, res) => {
     try {
         const user = req.user;
 
-        console.log(user);
-
-        res.status(200).json(user);
+        res.status(200).json({
+            id: user.id,
+            nom: user.nom,
+            foto: user.foto
+        });
     } catch (error) {
         console.log(error);
         res.status(500).send('ERROR 500');

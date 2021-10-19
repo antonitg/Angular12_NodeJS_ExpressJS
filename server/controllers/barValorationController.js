@@ -4,23 +4,34 @@ const User = require('../models').user;
 
 module.exports.create_valoration = async(req, res) => {
     try {
-        var new_rate = req.body.rate;
-        if (new_rate > 5) {
-            new_rate = 5;
-        } else if (new_rate < 1) {
-            new_rate = 1;
+
+        var check_valoration = await BarValoration.findOne({
+            id_bar: req.body.id_bar,
+            "valorations.id_user": req.user.id
+        })
+
+        if (check_valoration) {
+            res.status(401).json({ msg: "Ya has hecho una reseña en este bar" });
+        } else {
+            var new_rate = req.body.rate;
+            if (new_rate > 5) {
+                new_rate = 5;
+            } else if (new_rate < 1) {
+                new_rate = 1;
+            }
+
+            var valoration = {
+                id_user: req.user.id,
+                rate: new_rate,
+                descr: req.body.descr,
+                date: new Date()
+            }
+
+            await BarValoration.updateOne({ id_bar: req.body.id_bar }, { $push: { valorations: valoration } });
+
+            res.json({ msg: "Valoracion creada correctamente" });
         }
 
-        var valoration = {
-            id_user: req.user.id,
-            rate: new_rate,
-            descr: req.body.descr,
-            date: new Date()
-        }
-
-        await BarValoration.updateOne({ id_bar: req.body.id_bar }, { $push: { valorations: valoration } });
-
-        res.json({ msg: "Valoracion creada correctamente" });
     } catch (error) {
         console.log(error);
         res.status(500).send('ERROR 500');
