@@ -1,4 +1,5 @@
 const { decode } = require('../utils/jwt');
+const User = require('../models/user');
 
 module.exports.authByToken = async(req, res, next) => {
 
@@ -32,7 +33,17 @@ module.exports.authByToken = async(req, res, next) => {
             throw new Error('Expired token');
         }
 
-        req.user = user;
+        const this_user = await User.findOne({
+            where: {
+                id: user.id
+            }
+        })
+
+        if (!this_user) {
+            throw new Error("Invalid User");
+        }
+
+        req.user = this_user;
         return next();
     } catch (e) {
         return res.status(401).json({
