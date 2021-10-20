@@ -41,15 +41,24 @@ module.exports.create_valoration = async(req, res) => {
 module.exports.getBarValorations = async(req, res) => {
     try {
 
+        if (req.user) {
+            console.log('hay jwt');
+
+            var user_valoration = await BarValoration.findOne({
+                id_bar: req.params.id_bar,
+                "valorations.id_user": req.user.id
+            });
+        }
+
         var skip = req.params.limit - 10;
 
         var valorations = await BarValoration.aggregate([
             { "$match": { "id_bar": req.params.id_bar } },
             { "$unwind": "$valorations" },
             { "$sort": { "valorations.rate": -1 } },
-            { "$project": { "_id": 0, "id_user": "$valorations.id_user", "rate": "$valorations.rate", "descr": "$valorations.descr", "date": "$valorations.date" } },
-            { "$skip": skip },
-            { "$limit": 10 }
+            { "$project": { "_id": "$valorations._id", "id_user": "$valorations.id_user", "rate": "$valorations.rate", "descr": "$valorations.descr", "date": "$valorations.date" } },
+            // { "$skip": skip },
+            // { "$limit": 10 }
         ]);
 
         if (!valorations) {
@@ -58,17 +67,37 @@ module.exports.getBarValorations = async(req, res) => {
 
         for (let i = 0; i < valorations.length; i++) {
 
-            this_user = await User.findOne({
-                where: {
-                    id: valorations[i].id_user
+            if (req.user && user_valoration) {
+
+                if (req.user.id == valorations[i].id_user) {
+                    this_user = await User.findOne({
+                        where: {
+                            id: req.user.id
+                        }
+                    });
+                    user_valoration = valorations[i];
+
+                    user_valoration.nom = this_user.nom;
+                    user_valoration.propia = true;
+
+                    valorations.splice(i, 1);
+
+                    valorations.unshift(user_valoration);
                 }
-            });
 
-            if (!this_user) {
-                this_user = { nom: "Usuario no encontrado" };
+            } else {
+                this_user = await User.findOne({
+                    where: {
+                        id: valorations[i].id_user
+                    }
+                });
+
+                if (!this_user) {
+                    this_user = { nom: "Usuario no encontrado" };
+                }
+
+                valorations[i].nom = this_user.nom;
             }
-
-            valorations[i].nom = this_user.nom;
         }
 
         res.json(valorations);
