@@ -18,11 +18,11 @@ export class CreateValorationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log();
   }
   createValoration() {
-    this.valService.createBarValoration(this.bar.id,this.valoRange.nativeElement.value,this.valoDescr.nativeElement.value).subscribe(jals => {
-      const bobo = jals;
-      console.log(bobo);
+    this.valService.createBarValoration(this.bar.id,this.valoRange.nativeElement.value,this.valoDescr.nativeElement.value).subscribe(params => {
+      // console.log(params);
 
     })
   }

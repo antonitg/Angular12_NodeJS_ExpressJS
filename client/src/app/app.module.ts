@@ -16,8 +16,6 @@ import { ValorationsModule } from './shared/valorations/valorations.module';
 import { LayoutComponent } from './shared/layout/layout.component';
 import { ShowAuthedDirective } from './shared/layout/show-authed.directive';
 import { AuthModule } from './auth/auth.module';
-import { CreateValorationComponent } from './shared/valorations/create-valoration/create-valoration.component';
-import { HttpTokenInterceptor } from './core/interceptors/http.token.interceptor';
 import { CoreModule } from './core/core.module';
 
 
@@ -44,6 +42,9 @@ import { CoreModule } from './core/core.module';
     ReactiveFormsModule,
     AuthModule,
     CoreModule
+  ],
+  exports: [
+    ShowAuthedDirective
   ],
   providers: [
 

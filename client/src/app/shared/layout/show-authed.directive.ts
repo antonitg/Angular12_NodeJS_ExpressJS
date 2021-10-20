@@ -28,5 +28,7 @@ export class ShowAuthedDirective {
 
   @Input() set appShowAuthed(condition: boolean) {
     this.condition = condition;
+    // console.log("Condition directive: " + condition);
+
   }
 }
