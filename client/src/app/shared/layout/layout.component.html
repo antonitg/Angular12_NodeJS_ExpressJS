@@ -2,9 +2,13 @@
   <div class="container-fluid">
     <a class="navbar-brand">APPBAR</a>
     <form class="d-flex">
-      <button *appShowAuthed="false" class="btn btn-outline-success" href="http://localhost:4200/app/auth">Login</button>
-      <button *appShowAuthed="true" class="btn btn-outline-danger" href="/app/auth">Log Out</button>
-      <div *appShowAuthed="true">hola</div>
+      <button *appShowAuthed="false" class="btn btn-outline-success" href="http://localhost:4200/app/auth" routerLink="/app/auth"routerLinkActive="active">Login</button>
+    <div *appShowAuthed="true" style="display: flex;">
+      <p style="margin:auto; font-size: 1.6em;">{{currentUser.nom}}</p>
+      <img  src="{{currentUser.foto}}" alt="User photo" style="border-radius: 50%;width: 40px;height: 40px;margin-left:6px;margin-right:6px;">
+      <button style="margin-left:6px;margin-right:6px;" *appShowAuthed="true" class="btn btn-outline-danger" (click)="logout()" routerLink="/app/auth"routerLinkActive="active" >Log Out</button>
+    </div>
+
       <!-- <button *appShowAuthed="null" class="btn btn-danger" href="/app/auth">Log Out</button> -->
 
       <!-- <p *ngIf="appShowAuthed == true"></p> -->

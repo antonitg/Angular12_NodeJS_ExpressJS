@@ -17,10 +17,6 @@ export class ShowAuthedDirective {
   ngOnInit() {
     this.userService.isAuthenticated.subscribe(
       (isAuthenticated) => {
-        console.log("asdasddLLLLL");
-
-        console.log(isAuthenticated);
-
         if (isAuthenticated && this.condition || !isAuthenticated && !this.condition) {
           this.viewContainer.createEmbeddedView(this.templateRef);
         } else {
@@ -32,7 +28,7 @@ export class ShowAuthedDirective {
 
   @Input() set appShowAuthed(condition: boolean) {
     this.condition = condition;
-    console.log("Condition directive: " + condition);
+    // console.log("Condition directive: " + condition);
 
   }
 }
