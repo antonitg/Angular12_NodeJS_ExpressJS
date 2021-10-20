@@ -12,9 +12,13 @@ export class HttpTokenInterceptor implements HttpInterceptor {
       'Authorization':'',
     };
     const token = this.jwtService.getToken();
+
+
+
     if (token) headersConfig['Authorization'] = `Token ${token}`;
 
     const request = req.clone({ setHeaders: headersConfig });
+
     return next.handle(request);
   }
 }
