@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Bar } from 'src/app/core/models/bar.models';
 import { Valoration } from 'src/app/core/models/valorations.model';
 import { ValorationsService } from 'src/app/core/services';
@@ -15,6 +16,7 @@ export class ListValorationsComponent implements OnInit {
   @ViewChild('updateValoRange') valoRangeUpdate!: ElementRef;
   constructor(
     private valService: ValorationsService,
+    private toastr: ToastrService,
   ) { }
   ngOnInit(): void {
   // console.log();
@@ -38,9 +40,12 @@ export class ListValorationsComponent implements OnInit {
     this.updatingValoration.rate = this.valoRangeUpdate.nativeElement.value
     this.updatingValoration.descr = this.valoDescrUpdate.nativeElement.value
     this.valService.updateValoration(this.updatingValoration).subscribe(ret => {
-      console.log(ret);
-
+      this.toastr.success("Valoración actualizada")
     })
+  }
+  deleteValoration(id:string){
+    console.log(id);
+
   }
  }
 

@@ -5,6 +5,7 @@ export interface Valoration {
   nom: string;
   rate: number;
   propia?:boolean;
+  foto:string;
   _id:string;
-  foto:string
+
 }
