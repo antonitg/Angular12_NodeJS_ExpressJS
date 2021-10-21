@@ -22,6 +22,10 @@ export class AppComponent implements OnInit {
 
 
   });
+  const hores = new Date().getHours()
+  const min = new Date().getMinutes()
+  const tot = hores+":"+min
+  console.log(tot)
 }
 
 

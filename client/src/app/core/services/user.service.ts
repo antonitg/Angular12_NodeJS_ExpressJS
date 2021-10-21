@@ -5,6 +5,7 @@ import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
 import { User } from '../models/user.model';
 import { map ,  distinctUntilChanged } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable({
@@ -19,8 +20,10 @@ export class UserService {
 
   constructor (
     private apiService: ApiService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private toastr: ToastrService
   ) {}
+ 
   populate() {
     // If JWT detected, attempt to get & store user's info
     if (this.jwtService.getToken()) {

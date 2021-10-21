@@ -1,6 +1,6 @@
 <nav *ngIf="showGeneralNav" class="navbar navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand">APPBAR</a>
+    <a routerLink="/" class="navbar-brand" >APPBAR</a>
     <form class="d-flex">
       <button *appShowAuthed="false" class="btn btn-outline-success" href="http://localhost:4200/app/auth" routerLink="/app/auth"routerLinkActive="active">Login</button>
     <div *appShowAuthed="true" style="display: flex;">
