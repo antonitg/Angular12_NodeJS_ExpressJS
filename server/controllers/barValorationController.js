@@ -92,10 +92,11 @@ module.exports.getBarValorations = async(req, res) => {
                 });
 
                 if (!this_user) {
-                    this_user = { nom: "Usuario no encontrado" };
+                    this_user = { nom: "Usuario no encontrado", foto: "https://www.softzone.es/app/uploads/2018/04/guest.png" };
                 }
 
                 valorations[i].nom = this_user.nom;
+                valorations[i].foto = this_user.foto;
             }
         }
 
@@ -139,7 +140,7 @@ module.exports.updateValoration = async(req, res) => {
             new_valoration.rate = 1;
         }
 
-        var update_valoration = await BarValoration.findOneAndUpdate({
+        await BarValoration.findOneAndUpdate({
             valorations: { $elemMatch: { _id: new ObjectId(req.params.id_valoration) } }
         }, {
             $set: { 'valorations.$': new_valoration }
