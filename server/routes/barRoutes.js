@@ -21,5 +21,6 @@ router.delete('/categories/:id_catego', barCategoController.deleteCatego);
 //valoration routes
 router.post('/valorations/', authByToken, barValorationController.create_valoration);
 router.get('/valorations/:id_bar/:limit', optionalAuth, barValorationController.getBarValorations);
+router.put('/valorations/:id_valoration', authByToken, barValorationController.updateValoration);
 
 module.exports = router;

@@ -1,6 +1,7 @@
-const { json } = require("body-parser");
+const ObjectId = require('mongoose').Types.ObjectId;
 const BarValoration = require("../models/barValorationModel");
 const User = require('../models').user;
+const { validateValoration } = require("../utils/validate");
 
 module.exports.create_valoration = async(req, res) => {
     try {
@@ -42,15 +43,13 @@ module.exports.getBarValorations = async(req, res) => {
     try {
 
         if (req.user) {
-            console.log('hay jwt');
-
             var user_valoration = await BarValoration.findOne({
                 id_bar: req.params.id_bar,
                 "valorations.id_user": req.user.id
             });
         }
 
-        var skip = req.params.limit - 10;
+        // var skip = req.params.limit - 10;
 
         var valorations = await BarValoration.aggregate([
             { "$match": { "id_bar": req.params.id_bar } },
@@ -105,5 +104,55 @@ module.exports.getBarValorations = async(req, res) => {
     } catch (error) {
         console.log(error);
         res.status(500).send('ERROR 500');
+    }
+}
+
+module.exports.updateValoration = async(req, res) => {
+    try {
+        var valoration = await BarValoration.aggregate([
+            { "$unwind": "$valorations" },
+            { "$match": { "valorations._id": new ObjectId(req.params.id_valoration) } }
+        ]);
+
+        if (!valoration[0]) {
+            throw { status: 401, message: 'La valoracion no existe' };
+        } else if (req.user.id != valoration[0].valorations.id_user) {
+            throw { status: 403, message: 'La valoracion no pertenece al usuario' };
+        }
+
+        const { rate, descr } = req.body;
+
+        var validate = validateValoration(rate, descr);
+        if (validate != true) {
+            throw { status: 500, message: "Parametros incorrectos", data: validate };
+        }
+
+        var new_valoration = valoration[0].valorations;
+
+        new_valoration.rate = rate;
+        new_valoration.descr = descr;
+        new_valoration.date = new Date();
+
+        if (new_valoration.rate > 5) {
+            new_valoration.rate = 5;
+        } else if (new_valoration.rate < 1) {
+            new_valoration.rate = 1;
+        }
+
+        var update_valoration = await BarValoration.findOneAndUpdate({
+            valorations: { $elemMatch: { _id: new ObjectId(req.params.id_valoration) } }
+        }, {
+            $set: { 'valorations.$': new_valoration }
+        }, {
+            'new': true,
+            'safe': true,
+            'upsert': true
+        });
+
+        res.json({ status: 200, message: "Valoracion modificada correctamente", data: new_valoration });
+    } catch (error) {
+        console.log(error);
+        if (!error.status) error.status = 500;
+        res.status(error.status).send(error);
     }
 }

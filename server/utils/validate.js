@@ -1,5 +1,14 @@
 isEmpty = (nom) => {
-    if (nom.length > 0) {
+    if (nom) {
+        if (nom.length > 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
+exists = (num) => {
+    if (num) {
         return true;
     }
     return false;
@@ -51,8 +60,32 @@ module.exports.validateUser = (nom, passwd, repasswd, email) => {
     } else {
         return errors;
     }
+}
 
+module.exports.validateValoration = (rate, descr) => {
+    let c_rate = exists(rate);
+    let c_descr = isEmpty(descr);
 
+    let check = true;
+    let errors = {
+        error_rate: "",
+        error_descr: ""
+    };
 
+    if (!c_rate) {
+        check = false;
+        errors.error_rate = "La valoracion esta vacia";
+    } else {
 
+    }
+    if (!c_descr) {
+        check = false;
+        errors.error_descr = "La descripcion esta vacia";
+    }
+
+    if (check) {
+        return true;
+    } else {
+        return errors;
+    }
 }
