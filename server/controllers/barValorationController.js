@@ -157,3 +157,32 @@ module.exports.updateValoration = async(req, res) => {
         res.status(error.status).send(error);
     }
 }
+
+module.exports.deleteValoration = async(req, res) => {
+    try {
+        var valoration = await BarValoration.aggregate([
+            { "$unwind": "$valorations" },
+            { "$match": { "valorations._id": new ObjectId(req.params.id_valoration) } }
+        ]);
+
+        if (!valoration[0]) {
+            throw { status: 401, message: 'La valoracion no existe' };
+        } else if (req.user.id != valoration[0].valorations.id_user) {
+            throw { status: 403, message: 'La valoracion no pertenece al usuario' };
+        }
+
+        await BarValoration.update({
+            valorations: { $elemMatch: { _id: new ObjectId(req.params.id_valoration) } }
+        }, {
+            "valorations": { $pull: { 'valorations.$._id': new ObjectId(req.params.id_valoration) } }
+        }, {
+            'multi': true
+        });
+
+        res.json({ status: 200, message: "Valoracion borrada correctamente" });
+    } catch (error) {
+        console.log(error);
+        if (!error.status) error.status = 500;
+        res.status(error.status).send(error);
+    }
+}
