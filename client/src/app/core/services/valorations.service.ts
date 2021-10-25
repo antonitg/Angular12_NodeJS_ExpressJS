@@ -22,6 +22,9 @@ export class ValorationsService {
       descr:valoration.descr
     })
   }
+  deleteBarValoration(id: String): Observable<any> {
+    return this.apiService.delete('bar/valorations/'+id)
+  }
   createBarValoration(id_bar: string, stars: number, valoration: string): Observable<any> {
     return this.apiService.post('bar/valorations/', {
       id_bar:id_bar,

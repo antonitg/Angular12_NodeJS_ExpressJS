@@ -27,10 +27,7 @@ export class ListValorationsComponent implements OnInit {
       this.valorations = valorations
     })
   }
-  delValoration(idValoration:String) {
-    console.log(idValoration);
 
-  }
   modalUpdateValoration(valoration:Valoration) {
     this.updatingValoration = valoration;
     this.valoDescrUpdate.nativeElement.innerHTML = valoration.descr;
@@ -43,8 +40,10 @@ export class ListValorationsComponent implements OnInit {
       this.toastr.success("Valoración actualizada")
     })
   }
-  deleteValoration(id:string){
-    console.log(id);
+  delValoration(id:string){
+    this.valService.deleteBarValoration(id).subscribe(data => {
+      this.toastr.success(data.msg)
+    });
 
   }
  }
