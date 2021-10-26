@@ -40,6 +40,7 @@ module.exports.create_valoration = async(req, res) => {
 }
 
 module.exports.getBarValorations = async(req, res) => {
+    console.log('YEEE QUE AÇI ENTRA');
     try {
 
         if (req.user) {
@@ -63,6 +64,11 @@ module.exports.getBarValorations = async(req, res) => {
         if (!valorations) {
             res.status(404).json({ msg: 'No existe el Bar' });
         }
+
+        if (valorations.length == 0) {
+            res.status(401).json({ message: "No valorations" })
+        }
+
 
         for (let i = 0; i < valorations.length; i++) {
 
@@ -171,13 +177,26 @@ module.exports.deleteValoration = async(req, res) => {
             throw { status: 403, message: 'La valoracion no pertenece al usuario' };
         }
 
-        await BarValoration.update({
+        // await BarValoration.findOneAndUpdate({
+        //     valorations: { $elemMatch: { _id: new ObjectId(req.params.id_valoration) } }
+        // }, {
+        //     $pull: { 'valorations._id': new ObjectId(req.params.id_valoration) }
+        // }, {
+        //     'new': true,
+        //     'safe': true,
+        //     'upsert': true
+        // });
+
+        var update_val = await BarValoration.findOneAndUpdate({
             valorations: { $elemMatch: { _id: new ObjectId(req.params.id_valoration) } }
         }, {
-            "valorations": { $pull: { 'valorations.$._id': new ObjectId(req.params.id_valoration) } }
+            $pull: { valorations: { _id: new ObjectId(req.params.id_valoration) } }
         }, {
-            'multi': true
+            'muli': true,
+            'upsert': false
         });
+
+        // await BarValoration.pull({ _id: new ObjectId(req.params.id_valoration) })
 
         res.json({ status: 200, message: "Valoracion borrada correctamente" });
     } catch (error) {
