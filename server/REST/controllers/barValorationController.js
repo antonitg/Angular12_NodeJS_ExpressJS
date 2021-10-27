@@ -192,7 +192,7 @@ module.exports.deleteValoration = async(req, res) => {
         }, {
             $pull: { valorations: { _id: new ObjectId(req.params.id_valoration) } }
         }, {
-            'muli': true,
+            'multi': true,
             'upsert': false
         });
 
