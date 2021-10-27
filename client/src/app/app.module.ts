@@ -17,6 +17,7 @@ import { LayoutComponent } from './shared/layout/layout.component';
 import { ShowAuthedDirective } from './shared/layout/show-authed.directive';
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
+import { ProfileModule } from './profile/profile.module';
 
 
 
@@ -40,6 +41,7 @@ import { CoreModule } from './core/core.module';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     ReactiveFormsModule,
+    ProfileModule,
     AuthModule,
     CoreModule
   ],
