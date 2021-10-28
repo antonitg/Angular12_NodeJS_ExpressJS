@@ -1,10 +1,15 @@
-const { makeExecutableSchema } = require('graphql-tools');
+// const { makeExecutableSchema,  } = require('graphql-tools');
+const path = require('path');
+// const { loadFilesSync, mergeTypeDefs } = require('graphql-tools');
+const { loadFilesSync } = require('@graphql-tools/load-files');
+const { mergeTypeDefs } = require('@graphql-tools/merge');
 const { graphqlExpress } = require('apollo-server-express');
-import * as barType from './bars/bars.graphql';
-const { barResolvers } = require('./bars/bars.reolvers');
+// const { Bar, newBar } = require('./bars/bars.graphql');
+// import * as barType from './bars/bars.graphql'
+// const { barResolvers } = require('./bars/bars.resolvers');
 const { GraphQLScalarType } = require('graphql');
 const { Kind } = require('graphql/language');
-const merge = require('lodash.merge');
+// const merge = require('lodash.merge');
 
 
 
@@ -35,18 +40,24 @@ const dateResolver = {
     }),
 };
 
-export const schema = makeExecutableSchema({
-    typeDefs: [
-        schemaDefinition,
-        barType
-    ],
-    resolvers: merge({},
-        dateResolver,
-        barResolvers
-    )
-})
+// const schema = makeExecutableSchema({
+//     typeDefs: [
+//         schemaDefinition,
+//         Bar,
+//         newBar
+//     ],
+//     resolvers: merge({},
+//         dateResolver,
+//         barResolvers
+//     )
+// })
 
 
-export const graphQLRouter = graphqlExpress((req) => ({
-    schema: schema
-}))
+// const graphQLRouter = graphqlExpress((req) => ({
+//     schema: schema
+// }))
+
+const typesArray = loadFilesSync(path.join(__dirname, './bars'));
+// const typesArray = loadFilesSync('./bars');
+
+module.exports = mergeTypeDefs(typesArray, { all: true });

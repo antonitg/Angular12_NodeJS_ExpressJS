@@ -1,9 +1,10 @@
 const express = require('express');
+// const expressGql = require('express-graphql');
 const conectarDB = require('./config/mongodb');
 const cors = require("cors");
 const morgan = require('morgan');
 const { graphQLRouter } = require('./graphQLRouter');
-const { graphiqlExpress } = 'apollo-server-express';
+const { graphiqlExpress } = require('apollo-server-express');
 require('dotenv').config({ path: 'config/variables.env' });
 
 const app = express();

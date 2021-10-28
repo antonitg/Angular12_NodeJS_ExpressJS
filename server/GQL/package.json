@@ -10,13 +10,18 @@
     "author": "Juan Antonio Lopez Segui",
     "license": "ISC",
     "dependencies": {
+        "@graphql-tools/load-files": "^6.5.2",
+        "@graphql-tools/merge": "^8.2.1",
         "apollo-server-express": "^3.4.0",
+        "crypto-js": "^4.1.1",
         "dotenv": "^10.0.0",
         "express": "^4.17.1",
         "graphql": "^15.6.1",
+        "graphql-tools": "^8.2.0",
         "http": "0.0.1-security",
         "mongoose": "^6.0.12",
         "morgan": "^1.10.0",
-        "sequelize": "^6.8.0"
+        "sequelize": "^6.8.0",
+        "sequelize-slugify": "^1.6.0"
     }
 }
