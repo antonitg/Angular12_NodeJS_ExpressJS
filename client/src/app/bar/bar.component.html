@@ -14,7 +14,7 @@
     </li>
     <ng-template #noSelCart>
       <li class="nav-item">
-        <a class="nav-link" aria-current="page" href="/carta/{{slug_bar}}">Carta</a>
+        <a class="nav-link" aria-current="page" routerLink="/carta/{{slug_bar}}">Carta</a>
       </li>
     </ng-template>
     <li *ngIf="page == 'res'; else noSelRes" class="nav-item">
@@ -22,7 +22,7 @@
     </li>
     <ng-template #noSelRes>
       <li class="nav-item">
-        <a class="nav-link" aria-current="page" href="/res/{{slug_bar}}">Reseñas</a>
+        <a class="nav-link" aria-current="page" routerLink="/res/{{slug_bar}}">Reseñas</a>
       </li>
     </ng-template>
     <li *ngIf="page == 'info'; else noSelInf" class="nav-item">
@@ -30,7 +30,7 @@
     </li>
     <ng-template #noSelInf>
       <li class="nav-item">
-        <a class="nav-link" aria-current="page" href="/info/{{slug_bar}}">Información</a>
+        <a class="nav-link" aria-current="page" routerLink="/info/{{slug_bar}}">Información</a>
       </li>
     </ng-template>
   </ul>
