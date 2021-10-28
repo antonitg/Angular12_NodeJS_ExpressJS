@@ -74,7 +74,7 @@ typings/
 
 # FuseBox cache
 .fusebox/
-
+*/
 /server/REST/config/config.json
 
 *.env

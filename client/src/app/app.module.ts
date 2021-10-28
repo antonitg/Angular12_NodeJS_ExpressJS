@@ -18,6 +18,7 @@ import { ShowAuthedDirective } from './shared/layout/show-authed.directive';
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { ProfileModule } from './profile/profile.module';
+import { GraphQLModule } from './graphql.module';
 
 
 
@@ -43,7 +44,8 @@ import { ProfileModule } from './profile/profile.module';
     ReactiveFormsModule,
     ProfileModule,
     AuthModule,
-    CoreModule
+    CoreModule,
+    GraphQLModule
   ],
   exports: [
     ShowAuthedDirective
