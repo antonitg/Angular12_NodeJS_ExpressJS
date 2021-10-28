@@ -83,7 +83,7 @@ export class AuthComponent implements OnInit {
   }
   login():void {
     this.UserService.attemptAuth(this.logForm.value).subscribe((params) => {
-      console.log(params);
+      window.location.href = "/"
     })
   }
 }
