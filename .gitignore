@@ -74,9 +74,9 @@ typings/
 
 # FuseBox cache
 .fusebox/
-*/
 /server/REST/config/config.json
 
 *.env
 *.png
 *.svg
+client/src/app/graphql2.module.ts
