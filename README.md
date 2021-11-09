@@ -13,8 +13,6 @@ _Proyecto APPBAR 21 Angular-Express_
 Proyecto de marketplace de bares (parte cliente) con angular12 y expressJs con sequelize para el primer proyecto de la asignatura servidor de 2DAW
 
 
-El proyecto es sobre una aplicacion web para la compra y venta de coches. 
-
 
 ## Tecnologías empleadas
 ***
