@@ -5,8 +5,10 @@ const Hobby = mongoose.model('Hobby');
 const resolvers = {
     Mutation: {
         newHobby: async(root, { newHobby }) => {
-            let hobby = new Hobby(newHobby);
+            console.log(newHobby);
+            hobby = new Hobby(newHobby);
             await hobby.save();
+            // console.log(hobby);
             return hobby;
         }
     }

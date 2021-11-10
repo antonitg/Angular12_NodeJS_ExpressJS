@@ -8,7 +8,8 @@ const request = require('./requests')
 
 const SERVER = new ApolloServer({
     typeDefs,
-    resolvers
+    resolvers,
+    playground: true
 });
 
 const SERVERAUTH = new ApolloServer({

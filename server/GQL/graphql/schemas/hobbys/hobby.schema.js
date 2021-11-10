@@ -8,7 +8,7 @@ const typeDefs = gql `
         id_user: String!
     }
 
-    input newHobby {
+    input newHobbyInput {
         nom: String!
         descr: String!
         id_user: String!
@@ -16,11 +16,12 @@ const typeDefs = gql `
 
     extend type Query {
         getYourHobbys(_id: ID!): Hobby!
+        deleteHobby(_id: ID!): Hobby
     }
 
     extend type Mutation {
-        newHobby(hobby: newHobby): Hobby!
-        deleteHobby(_id: ID!): Hobby
+        newHobby(newHobby: newHobbyInput): Hobby!
+        updateHobby(_id: ID!, newHobby: newHobbyInput!): Hobby!
     }
 `;
 
