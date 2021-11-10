@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const Hobby = mongoose.model('Hobby');
 
 const resolvers = {
+    // Query: {
+
+    // },
     Mutation: {
         newHobby: async(root, { newHobby }, context) => {
-            // console.log(newHobby);
-            // console.log(context.user);
-
             newHobby.id_user = context.user.user.id;
 
             hobby = new Hobby(newHobby);

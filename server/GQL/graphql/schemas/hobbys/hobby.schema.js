@@ -5,7 +5,6 @@ const typeDefs = gql `
         _id: ID!
         nom: String!
         descr: String!
-        id_user: String!
     }
 
     input newHobbyInput {
@@ -14,7 +13,7 @@ const typeDefs = gql `
     }
 
     extend type Query {
-        getYourHobbys(_id: ID!): Hobby!
+        getYourHobbys: Hobby!
         deleteHobby(_id: ID!): Hobby
     }
 
