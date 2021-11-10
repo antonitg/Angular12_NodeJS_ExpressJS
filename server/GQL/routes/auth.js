@@ -1,30 +1,18 @@
-var jwt = require('express-jwt');
-var secret = process.env.SECRET;
-// console.log(secret);
+module.exports.getTokenFromHeader = (req) => {
 
-function getTokenFromHeader(req) {
-    // console.log("++++++++++++++++++++++++++++++++++++++++++++++++=");
-    // console.log(req.headers.authorization.split(' ')[1]);
-    if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Token' ||
-        req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-        return req.headers.authorization.split(' ')[1];
+    const authHeader = req.headers.authorization ? req.headers.authorization.split(' ') : null;
+
+
+    if (!authHeader) {
+        return null;
     }
 
-    return null;
+    //Check if authorization type is token
+    if (authHeader[0] !== 'Token')
+        return null;
+
+    //Check if token is valid
+    const token = authHeader[1];
+
+    return token;
 }
-
-var auth = {
-    required: jwt({
-        secret: secret,
-        userProperty: 'payload',
-        getToken: getTokenFromHeader
-    }),
-    optional: jwt({
-        secret: secret,
-        userProperty: 'payload',
-        credentialsRequired: false,
-        getToken: getTokenFromHeader
-    })
-};
-
-module.exports = auth;

@@ -11,7 +11,6 @@ const typeDefs = gql `
     input newHobbyInput {
         nom: String!
         descr: String!
-        id_user: String!
     }
 
     extend type Query {

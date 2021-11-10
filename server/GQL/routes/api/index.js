@@ -5,9 +5,9 @@ var SERVERS = require('./graphql');
 
 
 // router.use('/hobby', require('./hobbys'));
-router.use('/graphqlauth', require('../auth').required); // not nice
-SERVERS.graphqlauth.applyMiddleware({ app: router, path: '/graphqlauth' });
-SERVERS.graphql.applyMiddleware({ app: router, path: '/graphql' });
+// router.use('/graphqlauth', require('../auth').required); // not nice
+// SERVERS.graphqlauth.applyMiddleware({ app: router, path: '/graphqlauth' });
+// SERVERS.graphql.applyMiddleware({ app: router, path: '/graphql' });
 SERVERS.graphql.applyMiddleware({ app: router, path: '/graphql' });
 
 router.use(function(err, req, res, next) {

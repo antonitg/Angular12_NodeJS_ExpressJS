@@ -1,14 +1,17 @@
 const mongoose = require('mongoose');
 const Hobby = mongoose.model('Hobby');
-// const Bar = require('../../../models').bar;
 
 const resolvers = {
     Mutation: {
-        newHobby: async(root, { newHobby }) => {
-            console.log(newHobby);
+        newHobby: async(root, { newHobby }, context) => {
+            // console.log(newHobby);
+            // console.log(context.user);
+
+            newHobby.id_user = context.user.user.id;
+
             hobby = new Hobby(newHobby);
             await hobby.save();
-            // console.log(hobby);
+
             return hobby;
         }
     }

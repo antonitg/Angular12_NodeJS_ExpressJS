@@ -78,3 +78,19 @@ module.exports.find = async(req, res) => {
         res.status(500).send('ERROR 500');
     }
 }
+
+module.exports.graphqlAuth = async(req, res) => {
+    try {
+        const user = req.user;
+
+        res.json({
+            user: {
+                id: user.id
+            }
+        });
+    } catch (error) {
+        console.log(error);
+        if (!error.status) error.status = 500;
+        res.status(error.status).send(error);
+    }
+}

@@ -6,7 +6,6 @@ const { authByToken } = require('../middleware/auth');
 router.post('/', userController.register);
 router.post('/login/', userController.login);
 router.get('/', authByToken, userController.find);
-// router.get('/:id', userController.obtenerProduct);
-// router.delete('/:id', userController.eliminarProduct);
+router.get('/graphqlAuth', authByToken, userController.graphqlAuth);
 
 module.exports = router;
