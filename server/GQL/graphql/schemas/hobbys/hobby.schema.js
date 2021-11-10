@@ -13,7 +13,7 @@ const typeDefs = gql `
     }
 
     extend type Query {
-        getYourHobbys: Hobby!
+        getYourHobbys: [Hobby!]
         deleteHobby(_id: ID!): Hobby
     }
 
