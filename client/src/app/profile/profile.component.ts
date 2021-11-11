@@ -9,6 +9,7 @@ import { GraphQLService } from '../graphql.service';
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
+
 })
 export class ProfileComponent implements OnInit {
   user!:User
@@ -23,16 +24,16 @@ export class ProfileComponent implements OnInit {
   @ViewChild ('upDescr') upDescr!: ElementRef
 
   constructor(
-
     private apollo: Apollo,
     private graphQLService: GraphQLService,
-    private userService: UserService
+    private userService: UserService,
   ) { }
 
   ngOnInit(): void {
     this.userService.currentUser.subscribe(data => {
       this.user = data;
     })
+
     this.getYourHobbys()
   }
   modalUpdateHobby(hobby: any) {
@@ -51,7 +52,11 @@ export class ProfileComponent implements OnInit {
       id:this.updatingHobbyId
     }).subscribe(data => {
       console.log(data);
+      this.getYourHobbys()
+
     })
+    // this.cd.markForCheck();
+
   }
   getYourHobbys() {
     this.graphQLService.getYourHobbys().subscribe((data) => {
@@ -66,7 +71,16 @@ export class ProfileComponent implements OnInit {
     }
     this.graphQLService.deleteHobby(this.input).subscribe( data => {
       console.log(data)
+      this.getYourHobbys();
+      this.graphQLService.getYourHobbys().subscribe((data) => {
+        this.hobbies = data.data.getYourHobbys
+        console.log(this.hobbies);
+
+      })
+
     })
+
+
   }
   newHobby() {
     this.input = {
@@ -76,6 +90,7 @@ export class ProfileComponent implements OnInit {
     console.log(this.input);
 
     this.graphQLService.newHobby(this.input).subscribe((data) => {
+      this.getYourHobbys()
 
     });
   }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Bar } from 'src/app/core/models/bar.models';
 import { Valoration } from 'src/app/core/models/valorations.model';
@@ -17,17 +17,20 @@ export class ListValorationsComponent implements OnInit {
   constructor(
     private valService: ValorationsService,
     private toastr: ToastrService,
+    private cd: ChangeDetectorRef
+
   ) { }
   ngOnInit(): void {
   // console.log();
 
+    this.getValorations();
+  }
+  getValorations() {
     this.valService.getBarValorations(this.bar.id).subscribe(valorations => {
       console.log(valorations);
-
       this.valorations = valorations
     })
   }
-
   modalUpdateValoration(valoration:Valoration) {
     this.updatingValoration = valoration;
     this.valoDescrUpdate.nativeElement.innerHTML = valoration.descr;
@@ -38,11 +41,16 @@ export class ListValorationsComponent implements OnInit {
     this.updatingValoration.descr = this.valoDescrUpdate.nativeElement.value
     this.valService.updateValoration(this.updatingValoration).subscribe(ret => {
       this.toastr.success("Valoración actualizada")
+      this.getValorations();
+
     })
   }
   delValoration(id:string){
     this.valService.deleteBarValoration(id).subscribe(data => {
       this.toastr.success(data.msg)
+      // this.getValorations();
+      this.cd.markForCheck()
+
     });
 
   }
