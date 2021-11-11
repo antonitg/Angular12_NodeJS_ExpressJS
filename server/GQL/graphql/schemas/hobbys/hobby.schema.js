@@ -7,19 +7,27 @@ const typeDefs = gql `
         descr: String!
     }
 
+    type DeleteResponse{
+        ok: Boolean!
+    }
+
     input newHobbyInput {
         nom: String!
         descr: String!
     }
 
+    input idInput {
+        id: ID!
+    }
+
     extend type Query {
         getYourHobbys: [Hobby!]
-        deleteHobby(_id: ID!): Hobby
+        deleteHobby(idInput: idInput): DeleteResponse
     }
 
     extend type Mutation {
         newHobby(newHobby: newHobbyInput): Hobby!
-        updateHobby(_id: ID!, newHobby: newHobbyInput!): Hobby!
+        updateHobby(idInput: idInput, newHobby: newHobbyInput!): Hobby!
     }
 `;
 

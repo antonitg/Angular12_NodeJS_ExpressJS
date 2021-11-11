@@ -5,6 +5,7 @@ var http = require('http'),
     bodyParser = require('body-parser'),
     session = require('express-session'),
     cors = require('cors'),
+    morgan = require('morgan'),
     passport = require('passport'),
     errorhandler = require('errorhandler'),
     conectarDB = require('./config/mongodb');
@@ -28,6 +29,10 @@ require('./models/hobby');
 //social login
 app.use(passport.initialize());
 app.use(passport.session());
+app.disable('etag');
+app.use(cors());
+app.use(morgan('dev'));
+app.use(express.json());
 
 
 app.use(require('./routes'));

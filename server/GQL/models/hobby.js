@@ -6,4 +6,4 @@ var HobbySchema = new mongoose.Schema({
     id_user: String
 }, { timestamps: false });
 
-mongoose.model('Hobby', HobbySchema);
+module.exports = mongoose.model('Hobby', HobbySchema);
