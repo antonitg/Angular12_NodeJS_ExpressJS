@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {APOLLO_OPTIONS} from 'apollo-angular';
-import {ApolloClientOptions, ApolloLink, InMemoryCache} from '@apollo/client/core';
+import {ApolloClientOptions, ApolloLink, DefaultOptions, InMemoryCache} from '@apollo/client/core';
 import {HttpLink} from 'apollo-angular/http';
 import { setContext } from '@apollo/client/link/context';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,6 +11,16 @@ export function createApollo(httpLink: HttpLink) {
       Accept: 'charset=utf-8'
     }
   }));
+  const defaultOptions: DefaultOptions = {
+    watchQuery: {
+      fetchPolicy: 'no-cache',
+      errorPolicy: 'ignore',
+    },
+    query: {
+      fetchPolicy: 'no-cache',
+      errorPolicy: 'all',
+    },
+  }
   const auth = setContext((operation, context) => {
     const token = localStorage.getItem('jwtToken');
     if (token === null) {
@@ -28,7 +38,9 @@ export function createApollo(httpLink: HttpLink) {
 
   return {
     link,
-    cache
+    cache,
+    defaultOptions,
+
   }
 }
 
