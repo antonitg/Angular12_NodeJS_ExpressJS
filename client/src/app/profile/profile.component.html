@@ -17,8 +17,18 @@
         </div>
       </div>
     </div>
+    <div style="display: inline-flex; flex-wrap: wrap;">
+      <div class="card" style="width: 18rem;" *ngFor="let hobby of hobbies">
+        <div class="card-body" >
+          <h5 class="card-title">{{hobby.nom}}</h5>
+          <p class="card-text">{{hobby.descr}}</p>
+          <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateHobbyModal" (click)="modalUpdateHobby(hobby)">Update</a>
+          <a class="btn btn-danger" (click)="deleteHobby(hobby._id)">Delete</a>
+        </div>
+      </div>
+    </div>
   </div>
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBarModal">Add Bar</button>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBarModal">Add Hobby</button>
 </div>
 <div class="modal fade" id="addBarModal" tabindex="-1" aria-labelledby="addBarModal" aria-hidden="true">
   <div class="modal-dialog">
@@ -31,37 +41,43 @@
         <form>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label" #addBarName>Name:</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input type="text" class="form-control" #inNom id="recipient-name">
           </div>
           <div class="mb-3">
             <label for="message-text" class="col-form-label" #addBarDescr>Description:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="mb-3">
-            <label for="message-text" class="col-form-label" #addBarDescr>Address:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="mb-3">
-            <label for="message-text" class="col-form-label" #addBarDescr>City:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="mb-3">
-            <label for="message-text" class="col-form-label" #addBarDescr>Coords:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="mb-3">
-            <label for="message-text" class="col-form-label" #addBarDescr>Schedule:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="mb-3">
-            <label for="message-text" class="col-form-label" #addBarDescr>Photo link:</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input type="text" class="form-control" #inDescr id="recipient-name">
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
+        <button type="button" class="btn btn-primary" (click)="newHobby()">Create Hobby</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="updateHobbyModal" tabindex="-1" aria-labelledby="updateHobbyModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label" #addBarName>Name:</label>
+            <input type="text" class="form-control" #upNom id="recipient-name">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label" #addBarDescr>Description:</label>
+            <input type="text" class="form-control" #upDescr id="recipient-name">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="updateHobby()">Update Hobby</button>
       </div>
     </div>
   </div>
