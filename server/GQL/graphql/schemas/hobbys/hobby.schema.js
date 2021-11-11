@@ -27,7 +27,7 @@ const typeDefs = gql `
 
     extend type Mutation {
         newHobby(newHobby: newHobbyInput): Hobby!
-        updateHobby(idInput: idInput, newHobby: newHobbyInput!): Hobby!
+        updateHobby(idInput: idInput, newHobby: newHobbyInput): Hobby!
     }
 `;
 

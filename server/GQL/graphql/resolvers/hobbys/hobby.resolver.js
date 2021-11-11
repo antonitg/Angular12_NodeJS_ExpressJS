@@ -20,7 +20,7 @@ const resolvers = {
                 if (hobby[0]._doc) {
                     var id_user = hobby[0]._doc.id_user;
                     if (id_user === context.user.user.id) {
-                        Hobby.find({ _id: new ObjectId(idInput.id) }).remove().exec();
+                        await Hobby.find({ _id: new ObjectId(idInput.id) }).remove().exec();
                         return { ok };
                     }
                 }
@@ -39,6 +39,22 @@ const resolvers = {
             await hobby.save();
 
             return hobby;
+        },
+        updateHobby: async(root, { idInput, newHobby }, context) => {
+            var ok = Boolean(idInput.id);
+            var hobby = await Hobby.find({ _id: new ObjectId(idInput.id) });
+
+            if (hobby[0]) {
+                if (hobby[0]._doc) {
+                    var this_hobby = hobby[0]._doc;
+                    this_hobby.nom = newHobby.nom;
+                    this_hobby.descr = newHobby.descr;
+                    if (this_hobby.id_user === context.user.user.id) {
+                        await Hobby.where({ _id: new ObjectId(idInput.id) }).update({ $set: { nom: this_hobby.nom, descr: this_hobby.descr } }).exec();
+                        return this_hobby;
+                    }
+                }
+            }
         }
     }
 };
