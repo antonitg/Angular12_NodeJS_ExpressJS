@@ -48,8 +48,8 @@ export class ListValorationsComponent implements OnInit {
   delValoration(id:string){
     this.valService.deleteBarValoration(id).subscribe(data => {
       this.toastr.success(data.msg)
-      // this.getValorations();
-      this.cd.markForCheck()
+      this.getValorations();
+      // this.cd.markForCheck()
 
     });
 

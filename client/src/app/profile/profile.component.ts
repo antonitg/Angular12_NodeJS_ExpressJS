@@ -55,7 +55,6 @@ export class ProfileComponent implements OnInit {
       this.getYourHobbys()
 
     })
-    // this.cd.markForCheck();
 
   }
   getYourHobbys() {
