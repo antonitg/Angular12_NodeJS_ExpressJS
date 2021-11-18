@@ -5,7 +5,12 @@ const morgan = require('morgan')
 const productRouting = require('./routes/productRoutes');
 const userRouting = require('./routes/userRoutes');
 const barRouting = require('./routes/barRoutes');
-
+var dd_options = {
+    'response_code':true,
+    'tags': ['app:my_app']
+      }
+  
+var connect_datadog = require('connect-datadog')(dd_options);
 const app = express();
 conectarDB();
 
@@ -15,6 +20,7 @@ const port = process.env.PORT || 4000
 app.disable('etag');
 app.use(cors());
 app.use(morgan('dev'));
+app.use(connect_datadog);
 app.use(express.json());
 
 app.get('/', function(req, res) {
