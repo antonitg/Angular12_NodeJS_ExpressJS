@@ -1,0 +1,22 @@
+
+version: "3"
+services:
+  app:
+    container_name: client
+    build:
+      dockerfile: client/Dockerfile
+    ports:
+      - '4200:4200'
+    networks:
+      - main
+  server:
+    container_name: server
+    build:
+      dockerfile: server/Dockerfile
+    ports:
+      - '4000:4000'
+    networks:
+      - main
+networks:
+  main:
+    driver: bridge
