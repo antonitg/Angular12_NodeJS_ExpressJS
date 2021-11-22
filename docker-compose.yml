@@ -6,7 +6,7 @@ services:
     build:
       dockerfile: client/Dockerfile
     ports:
-      - '4200:4200'
+      - ${CLIENT_PORT}:4200
     networks:
       - main
   server:
@@ -14,7 +14,20 @@ services:
     build:
       dockerfile: server/Dockerfile
     ports:
-      - '4000:4000'
+      - ${SERVER_PORT}:4000
+    networks:
+      - main
+    depends_on:
+      - mongo
+  mongo:
+    container_name: database_mongo
+    image: mongo:latest
+    volumes:
+      - ./mongo/dump:/dump
+      - ./mongo/script.sh:/docker-entrypoint-initdb.d/script.sh
+    # command: mongorestore /var/dump, amb el "docker-entrypoint.... ja executa l'script"
+    ports:
+      - ${MONGO_PORT}:27017
     networks:
       - main
 networks:
