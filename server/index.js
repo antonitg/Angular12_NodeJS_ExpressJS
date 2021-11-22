@@ -26,7 +26,6 @@ const port = process.env.PORT || 4000
 app.disable('etag');
 app.use(cors());
 app.use(morgan('dev'));
-app.use(connect_datadog);
 app.use(express.json());
 
 app.get('/', function(req, res) {
