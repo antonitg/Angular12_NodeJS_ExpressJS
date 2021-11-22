@@ -5,12 +5,18 @@ const morgan = require('morgan')
 const productRouting = require('./routes/productRoutes');
 const userRouting = require('./routes/userRoutes');
 const barRouting = require('./routes/barRoutes');
-var dd_options = {
-    'response_code':true,
-    'tags': ['app:my_app']
-      }
+const client = require('prom-client');
+
   
-var connect_datadog = require('connect-datadog')(dd_options);
+const collectDefaultMetrics = client.collectDefaultMetrics;
+collectDefaultMetrics({ timeout: 5000 });
+
+const counterHomeEndpoint = new client.Counter({
+    name: 'counterHomeEndpoint',
+    help: 'The total number of processed requests'
+});
+
+
 const app = express();
 conectarDB();
 
@@ -24,9 +30,13 @@ app.use(connect_datadog);
 app.use(express.json());
 
 app.get('/', function(req, res) {
+    counterHomeEndpoint.inc();
     res.json({ msg: "API REST APPBAR" });
 });
-
+app.get('/metrics', (req, res) => {
+   res.set('Content-Type', client.register.contentType);
+   res.end(client.register.metrics());
+});
 app.use('/api/products', productRouting);
 app.use('/api/user', userRouting);
 app.use('/api/bar', barRouting);
