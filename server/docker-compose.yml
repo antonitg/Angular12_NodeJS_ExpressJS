@@ -1,0 +1,41 @@
+version: "3"
+services:
+  prometheus:
+    image: prom/prometheus:v2.20.1
+    container_name: prometheus_practica
+    networks:
+    - main
+    ports:
+    - "9090:9090"
+    volumes:
+    - ./prometheus:/etc/prometheus/
+    command:
+    - --config.file=/etc/prometheus/prometheus.yml
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana_practica
+    networks:
+    - main
+    ports:
+    - "3500:3000"
+    volumes:
+    - ./grafana:/etc/grafana/provisioning/datasources
+    - myGrafanaVol:/var/lib/grafana
+    environment:
+      GF_AUTH_DISABLE_LOGIN_FORM: "true"  #Deshabilitar el login de acceso a Grafana
+      GF_AUTH_ANONYMOUS_ENABLED: "true"   #Permitir la autenticación anónima
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Admin #Que el rol de autenticación anónima sea Admin
+      GF_INSTALL_PLUGINS: grafana-clock-panel 1.0.1 #Que instale el plugin grafana-clock-panel 1.0.1
+    depends_on:
+    - prometheus
+volumes:
+  myGrafanaVol:
+networks:
+  main:
+    driver: bridge
+    external: true
+
+# networks:
+#   mainpromgraf:
+#     external: true
+#     driver: bridge
