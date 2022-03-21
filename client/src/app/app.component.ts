@@ -14,18 +14,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     // console.log("aaaaaaaaa");
     this.userService.populate();
-
-    this.userService.isAuthenticated.subscribe(
-      (isAuthenticated) => {
-        console.log(isAuthenticated);
-        console.log("OOOOOOOOOOOOOOOOO");
-
-
-  });
-  const hores = new Date().getHours()
-  const min = new Date().getMinutes()
-  const tot = hores+":"+min
-  console.log(tot)
 }
 
 
