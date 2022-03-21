@@ -12,7 +12,6 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // console.log("aaaaaaaaa");
     this.userService.populate();
 }
 
